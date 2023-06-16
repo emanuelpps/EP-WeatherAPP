@@ -8,7 +8,7 @@ export default function DashboardCity() {
 
   return (
     <div className='dashboard-city'>
-        <h3> {Weather.name}  | {localTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</h3>
+        <h3 className='dashboard-city-title'> {Weather.name}  | {localTime.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</h3>
     </div>
   )
 }
