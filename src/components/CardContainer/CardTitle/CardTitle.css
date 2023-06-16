@@ -1,0 +1,33 @@
+.title-position {
+  height: 100%;
+  width: 95%;
+  grid-area: title-position;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". weather-title weather-title";
+  align-items: center;
+  justify-items: end;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.weather-title {
+  grid-area: weather-title;
+  width: max-content;
+}
+
+h1{
+    font-size: 4rem;
+}
+
+hr{
+    border: 0;
+    height: 0;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}

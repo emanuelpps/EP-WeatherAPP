@@ -1,0 +1,19 @@
+.forecast-cards{
+    height: 80%;
+    width: 100%;
+    grid-area: auto;
+    backdrop-filter: blur(3px) saturate(29%);
+    -webkit-backdrop-filter: blur(3px) saturate(29%);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+    display: grid; 
+    grid-auto-flow: row dense; 
+    grid-auto-columns: 1fr; 
+    grid-auto-rows: 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}

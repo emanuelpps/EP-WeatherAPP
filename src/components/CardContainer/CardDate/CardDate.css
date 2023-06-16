@@ -1,0 +1,9 @@
+.card-date{
+    width: 100%;
+    height: 100%;
+    grid-area: card-date;
+    display: grid;
+    align-items: end;
+    justify-items: end;
+    margin-right: 80px;
+}

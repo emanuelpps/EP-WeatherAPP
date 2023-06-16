@@ -1,0 +1,24 @@
+.card-container {
+  display: grid;
+  grid-area: 2/2/3/3;
+  justify-items: center;
+  align-items: center;
+  background-position: center;
+  background-image: url("https://i.ibb.co/42ZrzCg/cloudy.jpg");
+  backdrop-filter: blur(0px) saturate(165%);
+  -webkit-backdrop-filter: blur(0px) saturate(165%);
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  display: grid; 
+  grid-auto-flow: row dense; 
+  grid-auto-columns: 1fr; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 3fr 1fr; 
+  grid-template-rows: 0.5fr 4fr 2fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "card-date aside-container"
+    "title-position aside-container"
+    "forecast-card-container aside-container"; 
+}
