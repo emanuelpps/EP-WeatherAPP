@@ -4,10 +4,10 @@ import { WeatherContext} from '../../../context/WeatherContext/WeatherContext';
 
 export default function DashboardTemp() {
 
-  const { Weather } = useContext(WeatherContext);
+  const { weather } = useContext(WeatherContext);
   return (
     <div className='dashboard-temp'>
-        <h3>{Weather.main.temp.toFixed()}°C</h3>
+        <h3>{weather.main.temp.toFixed()}°C</h3>
     </div>
   )
 }

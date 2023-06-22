@@ -9,11 +9,11 @@ import { WeatherContext } from "../../context/WeatherContext/WeatherContext";
 import Loader from "../Loader/Loader";
 
 export default function DashboardContainer() {
-  const { Weather } = useContext(WeatherContext);
+  const { weather } = useContext(WeatherContext);
 
   return (
     <div>
-      {typeof Weather.main != "undefined" ? (
+      {typeof weather.main != "undefined" ? (
         <div className="dashboard-container">
           <DashboardTitle />
           <DashboardYear />
@@ -22,7 +22,7 @@ export default function DashboardContainer() {
           <DashboardCity />
         </div>
       ) : (
-        <div>
+        <div className="text-center mx-auto">
           <Loader />
         </div>
       )}
