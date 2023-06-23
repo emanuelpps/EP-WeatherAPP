@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./CardDate.css";
+import { WeatherContext } from "../../../context/WeatherContext/WeatherContext";
 
 export default function CardDate() {
+  
+  const [localTime, setLocalTime] = useState(null);
+  const { weather } = useContext(WeatherContext);
+
+  useEffect(() => {
+    const fetchData = () => {
+      const dateDate = new Date();
+      const timeZone = weather.timezone / 3600;
+      const correctDate = new Date(dateDate.getTime() - timeZone * 1000);
+      setLocalTime(correctDate);
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 1000); // Actualizar cada segundo
+
+    return () => {
+      clearInterval(intervalId); // Limpiar el intervalo al desmontar el componente
+    };
+  }, [weather]);
+
   const spanishMonths = [
     "Enero",
     "Febrero",
@@ -27,7 +49,7 @@ export default function CardDate() {
     "Sabado",
   ];
 
-  const currentDate = new Date();
+  const currentDate = new Date(localTime);
 
   const minutes = () => {
     if (currentDate.getMinutes() < 10) {

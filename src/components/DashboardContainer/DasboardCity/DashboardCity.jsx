@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 export default function DashboardCity() {
   const [actualDate, setActualDate] = useState(format(new Date(), "HH:mm"));
+  const { weather } = useContext(WeatherContext);
 
 
 
@@ -19,8 +20,6 @@ export default function DashboardCity() {
       clearInterval(interval); // Limpiar el intervalo al desmontar el componente
     };
   }, []);
-
-  const { weather } = useContext(WeatherContext);
 
   return (
     <div className="dashboard-city">

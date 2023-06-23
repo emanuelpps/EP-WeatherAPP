@@ -3,7 +3,6 @@ import {
   WEATHER_API_KEY,
   WEATHER_API_URL,
 } from "../../api/WeatherApi/WeatherApi";
-import { addDays, format } from "date-fns";
 
 export const WeatherContext = createContext("");
 
@@ -16,14 +15,7 @@ export const WeatherContextProvider = ({ children }) => {
   const [long, setLong] = useState([]);
   const [weather, setWeather] = useState([]);
   const [forecast, setForecast] = useState([]);
-  const [localTime, setLocalTime] = useState();
-  const [forecastAside, setForecastAside] = useState([]);
-  const [forecastSelected, setForecastSelected] = useState([]);
   const [locationLoaded, setLocationLoaded] = useState(false);
-
-  //const WeatherURL = `${WEATHER_API_URL}weather/?lat=${lat}&lon=${long}&units=metric&APPID=${WEATHER_API_KEY}`;
-
-  //const WeatherURLForecast = `${WEATHER_API_URL}forecast?id=${weather.id}&units=metric&APPID=${WEATHER_API_KEY}`;
 
   //obtener geolocalizacion actual del browser
   useEffect(() => {
@@ -50,17 +42,10 @@ export const WeatherContextProvider = ({ children }) => {
         setWeather(weatherData);
       }
     };
-    const fetchLocalTime = () => {
-      if (weather !== null || weather !== undefined) {
-        setLocalTime(new Date(weather.dt * 1000));
-      }
-    };
 
     if (lat !== null && long !== null && locationLoaded) {
       // Se han cargado las coordenadas de geolocalización
       fetchWeatherData();
-      fetchLocalTime();
-
       fetchForecastData(); // Llamar a fetchForecastData() después de establecer el estado weather
     } else {
       // Aún se están obteniendo las coordenadas de geolocalización
@@ -71,14 +56,13 @@ export const WeatherContextProvider = ({ children }) => {
   const fetchForecastData = async () => {
     if (weather !== null || weather !== undefined) {
       const forecastResponse = await fetch(
-        `${WEATHER_API_URL}forecast?id=${weather.id}&units=metric&APPID=${WEATHER_API_KEY}`
-      );
+        `${WEATHER_API_URL}forecast?lat=${lat}&lon=${long}&units=metric&appid=${WEATHER_API_KEY}`
+      )
       const forecastData = await forecastResponse.json();
       setForecast(forecastData.list);
       //console.log('forecast.list', forecastData.list);
-      getForecast(); // Llamar a getForecast() después de establecer el estado forecast
-      getForecastWeek();
     }
+      
   };
 
   // crear funcion con booleano
@@ -176,52 +160,23 @@ export const WeatherContextProvider = ({ children }) => {
 
   //reconfiguro la fecha actual para que coincida con la que devuelve la API
   //obtengo los siguientes 5 dias de la semana segun el dia actual
-  const getForecastWeek = () => {
-    const currentDate = new Date();
+ 
 
-    const actualDate = format(currentDate, "yyyy-MM-dd HH:mm:ss");
-
-    const nextDays = [];
-    for (let i = 1; i <= 5; i++) {
-      const nextDate = addDays(currentDate, i);
-      const formattedDate = format(nextDate, "yyyy-MM-dd 00:00:00");
-      nextDays.push(formattedDate);
-    }
-
-    console.log("actualDate", actualDate);
-
-    setForecastAside(nextDays);
-    console.log(forecastAside);
-    getForecast();
-  };
-
-  const getForecast = () => {
-    const forecastStateDefined = forecast || [];
-    const filteredForecast = forecastStateDefined.filter((element) => {
+  /* const filteredForecast = forecastStateDefined.filter((element) => {
       const forecastDate = element.dt_txt; // Extraer la fecha de dt_txt en el formato "yyyy-MM-dd"w
 
       return forecastAside.includes(forecastDate);
-    });
-    setForecastSelected(filteredForecast);
-  };
-
+    }); */
   const context = {
     weather,
     getCloudsConditions,
-    localTime,
     forecast,
     getCloudsConditionsIcon,
-    getForecastWeek,
-    getForecast,
-    forecastSelected,
   };
 
   console.log("weather", weather);
   console.log("forecast", forecast);
-  console.log("forecastSelected", forecastSelected);
-  console.log("forecastAside", forecastAside);
   console.log("weather.dt", weather.dt);
-  console.log("localTime", localTime);
   return <Provider value={context}>{children}</Provider>;
 };
 
