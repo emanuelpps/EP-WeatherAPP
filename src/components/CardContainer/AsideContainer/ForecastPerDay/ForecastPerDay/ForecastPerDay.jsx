@@ -1,17 +1,15 @@
-
 import "./ForecastPerDay.css";
 //import { BsFillCloudFill } from "react-icons/bs";
 
-export default function ForecastPerDay({item}) {
-
+export default function ForecastPerDay({ item }) {
   const dayArray = [
-    'Domingo',
-    'Lunes',
-    'Martes',
-    'Miércoles',
-    'Jueves',
-    'Viernes',
-    'Sábado'
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
   ];
 
   //const date = forecastSelected.dt_txt;
@@ -23,24 +21,23 @@ export default function ForecastPerDay({item}) {
   //const ForecastMaxTemp = forecast[0].main.temp_max.toFixed();
   //const ForecastMinTemp = forecast[0].main.temp_min.toFixed();
 
-  
-    <div class="spinner-border" role="status">
-    <span >Loading...</span>
+  <div class="spinner-border" role="status">
+    <span>Loading...</span>
   </div>;
 
-  const ForecastURL = `https://openweathermap.org/img/wn/${ForecastIcon}.png`
+  const ForecastURL = `https://openweathermap.org/img/wn/${ForecastIcon}.png`;
 
   return (
-    <div className='forecast-per-day-card'>
+    <div className="forecast-per-day-card">
       <div>
-       <img src={ForecastURL} alt='icon'/>
+        <img src={ForecastURL} alt="icon" />
       </div>
       <div>
-      <p className='day-display'>{dayDisplay}</p>
+        <p className="day-display">{dayDisplay}</p>
       </div>
-      <div> 
-      <p>{item.main.temp_max.toFixed()}°</p>
+      <div>
+        <p>{item.main.temp_max.toFixed()}°</p>
       </div>
     </div>
-  )
+  );
 }

@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 
 export default function CitySelection() {
   return (
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg">
       <form class="d-flex" role="search">
         <input
           class="form-control me-2"
@@ -13,7 +13,7 @@ export default function CitySelection() {
           aria-label="Search"
         />
         <button class="btn btn-outline-success" type="submit">
-        <BsSearch/>
+          <BsSearch />
         </button>
       </form>
     </nav>

@@ -5,9 +5,9 @@ import CardTitle from "./CardTitle/CardTitle";
 import ForecastPerHourContainer from "./ForecastPerHourContainer/ForecastPerHourContainer";
 import AsideContainer from "./AsideContainer/AsideContainer";
 
-export default function CardContainer() {
+export default function CardContainer({ backgroundImage }) {
   return (
-    <div className="card-container">
+    <div className="card-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <CardDate />
       <CardTitle />
       <ForecastPerHourContainer/>

@@ -127,7 +127,6 @@ export const WeatherContextProvider = ({ children }) => {
       803: "Parcialmente Nublado",
       804: "Nublado",
     };
-
     const weatherId = weather.weather[0].id;
     return weatherConditions[weatherId] || "Estado desconocido";
   };

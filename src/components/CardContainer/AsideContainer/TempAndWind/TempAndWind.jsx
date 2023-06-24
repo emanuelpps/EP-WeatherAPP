@@ -26,7 +26,7 @@ export default function TempAndWind() {
       <h2 className="title-city">{weather.name}</h2>
       <h2>{weather.main.temp.toFixed()}°C</h2>
       <h5>
-        {windDirection()} | {weather.wind.speed.toFixed()}Km/H
+        {windDirection()} | {weather.wind.speed.toFixed()} Km/h
       </h5>
     </div>
   );
