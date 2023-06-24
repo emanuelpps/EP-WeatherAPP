@@ -1,13 +1,20 @@
 {
   "files": {
-    "main.css": "/EP-WeatherAPP/static/css/main.58f219c2.css",
-    "main.js": "/EP-WeatherAPP/static/js/main.0bc2dc92.js",
+    "main.css": "/EP-WeatherAPP/static/css/main.c710142d.css",
+    "main.js": "/EP-WeatherAPP/static/js/main.33a82838.js",
+    "static/media/rain.gif": "/EP-WeatherAPP/static/media/rain.8f46623571a40fd56c66.gif",
+    "static/media/storm.gif": "/EP-WeatherAPP/static/media/storm.843a6f2f6ebb4066ad7d.gif",
+    "static/media/snowy.jpg": "/EP-WeatherAPP/static/media/snowy.cbe3529ac62bc0883b58.jpg",
+    "static/media/partly-cloudy.jpg": "/EP-WeatherAPP/static/media/partly-cloudy.f3da9da27085ef7730c3.jpg",
+    "static/media/cloudy.jpg": "/EP-WeatherAPP/static/media/cloudy.9f79d1f4ddbcebe926e5.jpg",
+    "static/media/sunny.jpg": "/EP-WeatherAPP/static/media/sunny.c970ce02ba4e4db9e70f.jpg",
+    "static/media/fog.jpg": "/EP-WeatherAPP/static/media/fog.7648af953bafcff50b2f.jpg",
     "index.html": "/EP-WeatherAPP/index.html",
-    "main.58f219c2.css.map": "/EP-WeatherAPP/static/css/main.58f219c2.css.map",
-    "main.0bc2dc92.js.map": "/EP-WeatherAPP/static/js/main.0bc2dc92.js.map"
+    "main.c710142d.css.map": "/EP-WeatherAPP/static/css/main.c710142d.css.map",
+    "main.33a82838.js.map": "/EP-WeatherAPP/static/js/main.33a82838.js.map"
   },
   "entrypoints": [
-    "static/css/main.58f219c2.css",
-    "static/js/main.0bc2dc92.js"
+    "static/css/main.c710142d.css",
+    "static/js/main.33a82838.js"
   ]
 }
