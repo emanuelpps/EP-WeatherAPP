@@ -16,6 +16,9 @@ export const WeatherContextProvider = ({ children }) => {
   const [weather, setWeather] = useState([]);
   const [forecast, setForecast] = useState([]);
   const [locationLoaded, setLocationLoaded] = useState(false);
+  const [newLat, setNewLat] = useState([]);
+  const [newLong, setNewLong] = useState([]);
+  const [newWeather, setNewWeather] = useState([]);
 
   //obtener geolocalizacion actual del browser
   useEffect(() => {
@@ -29,18 +32,16 @@ export const WeatherContextProvider = ({ children }) => {
 
     const fetchWeatherData = async () => {
       // Fetch de la API del clima usando las coordenadas
-      if (
-        lat !== null &&
-        lat !== undefined &&
-        long !== null &&
-        long !== undefined
-      ) {
+      if (newLat.length === 0 && newLong.length === 0) {
+        setNewLat(lat);
+        setNewLong(long)
         const weatherResponse = await fetch(
           `${WEATHER_API_URL}weather/?lat=${lat}&lon=${long}&units=metric&APPID=${WEATHER_API_KEY}`
         );
         const weatherData = await weatherResponse.json();
         setWeather(weatherData);
-      }
+        setNewWeather(weatherData)
+      } 
     };
 
     if (lat !== null && long !== null && locationLoaded) {
@@ -51,21 +52,38 @@ export const WeatherContextProvider = ({ children }) => {
       // Aún se están obteniendo las coordenadas de geolocalización
       fetchDataLocation();
     }
-  }, [lat, long, locationLoaded]);
+  }, [lat, long, locationLoaded, newLat, newLong, newWeather]);
 
   const fetchForecastData = async () => {
-    if (weather !== null || weather !== undefined) {
+    if (newLat === lat && newLong === long) {
       const forecastResponse = await fetch(
         `${WEATHER_API_URL}forecast?lat=${lat}&lon=${long}&units=metric&appid=${WEATHER_API_KEY}`
-      )
+      );
       const forecastData = await forecastResponse.json();
       setForecast(forecastData.list);
       //console.log('forecast.list', forecastData.list);
+    } else if (newLat !== lat && newLong !== long) {
+      const forecastResponse = await fetch(
+        `${WEATHER_API_URL}forecast?lat=${newLat}&lon=${newLong}&units=metric&appid=${WEATHER_API_KEY}`
+      );
+      const forecastData = await forecastResponse.json();
+      setForecast(forecastData.list);
     }
-      
   };
 
-  // crear funcion con booleano
+  // crear funcion que busque la ciudad ingresada en el buscador y obtenga las coordenadas las almacene
+  const fetchCitySearch = async (cityName) => {
+    const cityResponse = await fetch(
+      `${WEATHER_API_URL}weather?q=${cityName}&units=metric&appid=${WEATHER_API_KEY}`
+    );
+    const cityData = await cityResponse.json();
+    console.log('forecast.list', cityData);
+    const newLatCity = cityData.coord.lat;
+    const newLongCity = cityData.coord.lat;
+    setNewLat(newLatCity);
+    setNewLong(newLongCity);
+    setWeather(cityData);
+  };
 
   //Paso las condiciones meteorologicas segun devuelva la API de ingles al espanol
   //luego llamo esta funcion en el title de la card y renderizo el resultado
@@ -159,7 +177,6 @@ export const WeatherContextProvider = ({ children }) => {
 
   //reconfiguro la fecha actual para que coincida con la que devuelve la API
   //obtengo los siguientes 5 dias de la semana segun el dia actual
- 
 
   /* const filteredForecast = forecastStateDefined.filter((element) => {
       const forecastDate = element.dt_txt; // Extraer la fecha de dt_txt en el formato "yyyy-MM-dd"w
@@ -171,6 +188,8 @@ export const WeatherContextProvider = ({ children }) => {
     getCloudsConditions,
     forecast,
     getCloudsConditionsIcon,
+    newWeather,
+    fetchCitySearch
   };
 
   console.log("weather", weather);

@@ -10,14 +10,14 @@ import Loader from "../Loader/Loader";
 import cloudy from "../../assets/cloudy.jpg";
 import fog from "../../assets/fog.jpg";
 import partlyCloudy from "../../assets/partly-cloudy.jpg";
-import snowy from "../../assets/snowy.jpg";
+import snowy from "../../assets/snowy.gif";
 import storm from "../../assets/storm.gif";
 import sunny from "../../assets/sunny.jpg";
 import rain from "../../assets/rain.gif";
 
 export default function DashboardContainer() {
-  const [backgroundImage, setBackgroundImage] = useState()
-  const { weather } = useContext(WeatherContext);
+  const [backgroundImage, setBackgroundImage] = useState();
+  const { weather, newWeather } = useContext(WeatherContext);
   const dashboardBackgroundRef = useRef();
 
   useEffect(() => {
@@ -37,40 +37,43 @@ export default function DashboardContainer() {
         weather?.weather?.[0]?.id >= "200" &&
         weather?.weather?.[0]?.id < "300"
       ) {
-        setBackgroundImage(backgroundElements[4])
+        setBackgroundImage(backgroundElements[4]);
         return backgroundElements[4];
       } else if (
         weather?.weather?.[0]?.id >= "600" &&
         weather?.weather?.[0]?.id < "622"
       ) {
-        setBackgroundImage(backgroundElements[3])
+        setBackgroundImage(backgroundElements[3]);
         return backgroundElements[3];
       } else if (
         weather?.weather?.[0]?.id >= "300" &&
         weather?.weather?.[0]?.id < "600"
       ) {
-        setBackgroundImage(backgroundElements[6])
+        setBackgroundImage(backgroundElements[6]);
         return backgroundElements[6];
       } else if (
         weather?.weather?.[0]?.id >= "700" &&
         weather?.weather?.[0]?.id < "800"
       ) {
-        setBackgroundImage(backgroundElements[1])
+        setBackgroundImage(backgroundElements[1]);
         return backgroundElements[1];
-      } else if (weather?.weather?.[0]?.id === "800") {
-        setBackgroundImage(backgroundElements[5])
+      } else if (
+        weather?.weather?.[0]?.id >= "800" &&
+        weather?.weather?.[0]?.id < "801"
+      ) {
+        setBackgroundImage(backgroundElements[5]);
         return backgroundElements[5];
       } else if (
         weather?.weather?.[0]?.id >= "801" &&
-        weather?.weather?.[0]?.id < "802"
+        weather?.weather?.[0]?.id <= "802"
       ) {
-        setBackgroundImage(backgroundElements[2])
+        setBackgroundImage(backgroundElements[2]);
         return backgroundElements[2];
       } else if (
         weather?.weather?.[0]?.id >= "803" &&
         weather?.weather?.[0]?.id < "805"
       ) {
-        setBackgroundImage(backgroundElements[0])
+        setBackgroundImage(backgroundElements[0]);
         return backgroundElements[0];
       }
     };
@@ -83,12 +86,12 @@ export default function DashboardContainer() {
   }, [weather]);
 
   return (
-    <div ref={dashboardBackgroundRef} >
+    <div ref={dashboardBackgroundRef}>
       {typeof weather.main !== "undefined" ? (
         <div className="dashboard-container">
           <DashboardTitle />
           <DashboardYear />
-          <CardContainer backgroundImage={backgroundImage}/>
+          <CardContainer backgroundImage={backgroundImage} />
           <DashboardTemp />
           <DashboardCity />
         </div>

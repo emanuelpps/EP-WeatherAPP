@@ -11,7 +11,7 @@ export default function ForecastPerHourContainer() {
   useEffect(() => {
     const selectForecast = async () => {
       const selectedForecasts = [];
-      for (let index = 0; index < forecast.length; index++) {
+      for (let index = 0; index < forecast?.length; index++) {
         if (index <= 4) {
           const forecastSelect = forecast[index];
           selectedForecasts.push(forecastSelect);
