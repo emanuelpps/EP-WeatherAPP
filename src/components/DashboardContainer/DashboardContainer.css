@@ -31,12 +31,18 @@
   justify-items: center;
   align-items: center;
 }
+.dashboard-title a{
+  text-decoration: none !important;
+  text-shadow: none;
+  color: black;
+}
 .dashboard-year {
   display: grid;
   grid-area: 1/3/2/4;
   justify-items: center;
   align-items: center;
 }
+
 
 h3 {
   font-size: 1.3rem;
