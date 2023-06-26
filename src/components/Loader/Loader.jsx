@@ -2,9 +2,9 @@ import React from "react";
 
 export default function Loader() {
   return (
-    <div class="d-flex justify-content-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Cargando...</span>
+    <div className="d-flex justify-content-center mx-auto">
+      <div className="spinner-border align-content-center" role="status">
+        <span className="visually-hidden">Cargando...</span>
       </div>
     </div>
   );

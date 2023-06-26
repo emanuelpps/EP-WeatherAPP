@@ -14,3 +14,16 @@
 h2{
     font-size: 3rem;
 }
+
+
+@media screen and (max-width: 760px){
+    .title-city{
+        font-size: 1rem;
+    }
+    h2{
+      font-size: 1.5rem;
+    }
+    h5{
+        font-size: 0.8rem;
+    }
+  }

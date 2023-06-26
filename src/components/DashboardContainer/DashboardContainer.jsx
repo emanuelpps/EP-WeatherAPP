@@ -17,7 +17,7 @@ import rain from "../../assets/rain.gif";
 
 export default function DashboardContainer() {
   const [backgroundImage, setBackgroundImage] = useState();
-  const { weather, newWeather } = useContext(WeatherContext);
+  const { weather } = useContext(WeatherContext);
   const dashboardBackgroundRef = useRef();
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function DashboardContainer() {
   }, [weather]);
 
   return (
-    <div ref={dashboardBackgroundRef}>
+    <div className="dashboardAndCard" ref={dashboardBackgroundRef}>
       {typeof weather.main !== "undefined" ? (
         <div className="dashboard-container">
           <DashboardTitle />

@@ -8,9 +8,34 @@
     gap: 0px 0px;
     margin-left: 10px;
     margin-right: 10px; 
-    justify-items: center;
-    justify-content: center;
     align-items: center;
     justify-items: center;
-    align-content: center;
 }
+
+
+.imgIcon-div,
+.day-div,
+.temp-div {
+  text-align: center;
+}
+
+.day-display,
+.temp {
+  margin: 0;
+}
+
+
+
+@media screen and (max-width: 760px){
+    img{
+        width: 40px;
+    }
+    .day-display{
+        font-size: 0.8rem;
+        align-self: center;
+    justify-self: center;
+    }
+    .temp{
+        font-size: 0.8rem;
+    }
+  }

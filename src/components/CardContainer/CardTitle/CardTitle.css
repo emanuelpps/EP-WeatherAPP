@@ -4,15 +4,22 @@
   grid-area: title-position;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    ". . ."
-    ". . ."
+    "button-group button-group ."
+    "button-group button-group ."
     ". weather-title weather-title";
   align-items: center;
   justify-items: end;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.button-group{
+  display: grid;
+  grid-area: button-group;
+  justify-self: start; 
+  align-self: start;
 }
 
 .weather-title {
@@ -30,4 +37,68 @@ hr{
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+@media (max-width: 768px) {
+  .title-position {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "button-group"
+      "button-group"
+      "weather-title";
+    justify-items: center;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 1px;
+    flex-wrap: wrap; 
+  }
+  .button-group button {
+    flex: 0 0 auto; 
+    font-size: 0.8rem;
+  }
+  .button-group p {
+    flex: 1 1 auto; 
+    margin: 0;
+  }
+
+  .button-group a.btn svg {
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-position {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .button-group {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; 
+  }
+  .button-group button {
+    flex: 0 0 auto; 
+    font-size: 0.8rem;
+    
+  }
+
+  .button-group a.btn svg {
+    font-size: 0.8rem;
+  }
 }

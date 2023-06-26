@@ -29,14 +29,14 @@ export default function ForecastPerDay({ item }) {
 
   return (
     <div className="forecast-per-day-card">
-      <div>
-        <img src={ForecastURL} alt="icon" />
+      <div className="imgIcon-div">
+        <img src={ForecastURL} alt="icon"/>
       </div>
-      <div>
+      <div className="day-div">
         <p className="day-display">{dayDisplay}</p>
       </div>
-      <div>
-        <p>{item.main.temp_max.toFixed()}°</p>
+      <div className="temp-div">
+        <p className="temp">{item.main.temp_max.toFixed()}°</p>
       </div>
     </div>
   );

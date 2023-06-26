@@ -21,3 +21,39 @@
 h4{
     font-size: 1.2rem;
 }
+
+
+@media screen and (max-width: 760px) {
+    .forecast-cards {
+      min-height: 10px;
+      margin-bottom: 30px;
+    }
+  
+    h4 {
+      font-size: 0.8rem;
+    }
+  
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .forecast-cards {
+      height: auto;
+      grid-auto-rows: minmax(80px, auto); /* Reducción del alto de las cards */
+      gap: 5px; /* Disminución de la distancia lateral entre las cards */
+      margin-bottom: 10px; 
+    max-height: 100px;
+    }
+  
+    h4 {
+      font-size: 0.7rem;
+    }
+  
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }

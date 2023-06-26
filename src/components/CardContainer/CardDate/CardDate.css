@@ -7,3 +7,23 @@
     justify-items: end;
     margin-right: 80px;
 }
+
+@media (max-width: 768px) {
+    .card-date {
+      justify-items: center;
+      margin-right: 0;
+    }
+
+    .date{
+        font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .date{
+        font-size: 0.8rem;
+    }
+    .card-date {
+      margin-right: 0;
+    }
+  }

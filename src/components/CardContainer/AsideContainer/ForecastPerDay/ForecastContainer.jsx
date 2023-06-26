@@ -17,7 +17,7 @@ export default function ForecastContainer() {
       const nextDays = [];
       for (let i = 1; i <= 5; i++) {
         const nextDate = addDays(currentDate, i);
-        const formattedDate = format(nextDate, "yyyy-MM-dd 18:00:00");
+        const formattedDate = format(nextDate, "yyyy-MM-dd 15:00:00");
         nextDays.push(formattedDate);
       }
       setForecastAside(nextDays);

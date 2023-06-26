@@ -3,7 +3,6 @@ import "./CardDate.css";
 import { WeatherContext } from "../../../context/WeatherContext/WeatherContext";
 
 export default function CardDate() {
-  
   const [localTime, setLocalTime] = useState(null);
   const { weather } = useContext(WeatherContext);
 
@@ -14,16 +13,12 @@ export default function CardDate() {
       const correctDate = new Date(dateDate.getTime() - timeZone * 1000);
       setLocalTime(correctDate);
     };
-
     fetchData();
-
     const intervalId = setInterval(fetchData, 1000); // Actualizar cada segundo
-
     return () => {
       clearInterval(intervalId); // Limpiar el intervalo al desmontar el componente
     };
   }, [weather]);
-
   const spanishMonths = [
     "Enero",
     "Febrero",
@@ -60,12 +55,12 @@ export default function CardDate() {
   };
 
   const hours = () => {
-    if(currentDate.getHours() < 10){
+    if (currentDate.getHours() < 10) {
       return "0" + currentDate.getHours();
-    } else{
+    } else {
       return currentDate.getHours();
     }
-  }
+  };
 
   const nowDate =
     spanishDays[currentDate.getDay()] +
@@ -82,7 +77,7 @@ export default function CardDate() {
 
   return (
     <div className="card-date">
-      <header>{nowDate}</header>
+      <header className="date">{nowDate}</header>
     </div>
   );
 }
