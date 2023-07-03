@@ -20,8 +20,7 @@ export const WeatherContextProvider = ({ children }) => {
   const [newLat, setNewLat] = useState([]);
   const [newLong, setNewLong] = useState([]);
   const [newWeather, setNewWeather] = useState([]);
-  const [inputCityName, setInputCityName] = useState("");
-  const [citySearch, setCitySearch] = useState([]);
+  const [reload, setReload] = useState(false);
 
   //obtener geolocalizacion actual del browser
   useEffect(() => {
@@ -79,12 +78,13 @@ export const WeatherContextProvider = ({ children }) => {
       );
       const forecastData = await forecastResponse.json();
       setForecast(forecastData.list);
+      setReload(false);
     }
   };
 
   useEffect(() => {
     fetchForecastData();
-  }, [newLat, newLong, lat, long, weather]);
+  }, [newLat, newLong, lat, long, weather, reload]);
 
   // crear funcion que busque la ciudad ingresada en el buscador y obtenga las coordenadas las almacene
   const fetchCitySearch = async (coordinates) => {
@@ -97,7 +97,6 @@ export const WeatherContextProvider = ({ children }) => {
       setNewLat(cityData.coord.lat);
       setNewLong(cityData.coord.lon);
       setWeather(cityData);
-      setInputCityName(cityData.name);
       fetchForecastData();
     } catch (error) {
       console.error("Error fetching city data:", error);
@@ -111,9 +110,10 @@ export const WeatherContextProvider = ({ children }) => {
   console.log("newLat:", newLat);
   console.log("newLong:", newLong);
 
-  const realoadCityInformation = (coordinates) => {
-    fetchForecastData();
+  const realoadCityInformation = () => {
+    setReload(true);
   };
+
   //Paso las condiciones meteorologicas segun devuelva la API de ingles al espanol
   //luego llamo esta funcion en el title de la card y renderizo el resultado
   const getCloudsConditions = () => {
@@ -212,7 +212,7 @@ export const WeatherContextProvider = ({ children }) => {
     newWeather,
     fetchCitySearch,
     realoadCityInformation,
-    citySearch,
+    //citySearch,
   };
 
   console.log("weather", weather);

@@ -8,9 +8,8 @@ import { WEATHER_API_KEY } from "../../../../api/WeatherApi/WeatherApi";
 export default function CitySelection() {
   const [cityName, setCityName] = useState(null);
   const [coordinates, setCoordinates] = useState([]);
-  const { fetchCitySearch, realoadCityInformation } = useContext(WeatherContext);
-
- 
+  const { fetchCitySearch, realoadCityInformation } =
+    useContext(WeatherContext);
 
   const loadOptions = async (inputValue, loadedOptions) => {
     try {
@@ -21,9 +20,11 @@ export default function CitySelection() {
 
       const options = data.map((city) => ({
         value: `${city.lat} ${city.lon}`,
-        label: `${city.name} , ${city.state === undefined ? city.country : city.state} | ${city.country}`,
+        label: `${city.name} , ${
+          city.state === undefined ? city.country : city.state
+        } | ${city.country}`,
       }));
-      
+
       return {
         options: options,
         hasMore: false,
@@ -36,8 +37,6 @@ export default function CitySelection() {
       };
     }
   };
-
-  
 
   const handleOnChange = (selectedOption) => {
     setCityName(selectedOption);
@@ -52,8 +51,8 @@ export default function CitySelection() {
   const handleClick = (e) => {
     e.preventDefault();
     fetchCitySearch(coordinates);
-    realoadCityInformation(coordinates)
-    console.log('coord',coordinates);
+    realoadCityInformation();
+    console.log("coord", coordinates);
   };
 
   return (
