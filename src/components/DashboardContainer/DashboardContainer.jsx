@@ -96,7 +96,7 @@ export default function DashboardContainer() {
           <DashboardCity />
         </div>
       ) : (
-        <Loader className="text-center" />
+        <Loader className="text-center mx-auto" />
       )}
     </div>
   );

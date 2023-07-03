@@ -36,7 +36,7 @@ export default function ForecastPerDay({ item }) {
         <p className="day-display">{dayDisplay}</p>
       </div>
       <div className="temp-div">
-        <p className="temp">{item.main.temp_max.toFixed()}°</p>
+        <p className="temp">{Number(item.main.temp_max.toFixed())}°</p>
       </div>
     </div>
   );

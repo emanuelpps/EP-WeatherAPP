@@ -3,7 +3,8 @@
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
-  height: 100vh;
+  max-height: 100%;
+  width: 100%;
 }
 
 .dashboard-container {

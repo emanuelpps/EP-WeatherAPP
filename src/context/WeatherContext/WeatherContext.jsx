@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import {
   WEATHER_API_KEY,
   WEATHER_API_URL,
@@ -21,48 +21,59 @@ export const WeatherContextProvider = ({ children }) => {
   const [newLong, setNewLong] = useState([]);
   const [newWeather, setNewWeather] = useState([]);
   const [inputCityName, setInputCityName] = useState("");
+  const [citySearch, setCitySearch] = useState([]);
 
-  const fetchWeatherData = async () => {
-    // Fetch de la API del clima usando las coordenadas
-    if (newLat.length === 0 && newLong.length === 0) {
-      setNewLat(lat);
-      setNewLong(long);
+  //obtener geolocalizacion actual del browser
+  useEffect(() => {
+    const fetchDataLocation = async () => {
+      const isGeoLocationEnabled = "geolocation" in navigator;
+      if (!isGeoLocationEnabled) {
+        Swal.fire({
+          title: "Geolocalización no habilitada",
+          text: "La geolocalización no está habilitada en tu navegador. Por favor, habilita la geolocalización en la configuración del navegador para continuar.",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          setLat(position.coords.latitude);
+          setLong(position.coords.longitude);
+          setLocationLoaded(true); // Marcamos que se han cargado los datos de geolocalización
+        });
+      }
+    };
+
+    const fetchWeatherData = async () => {
+      // Fetch de la API del clima usando las coordenadas
       const weatherResponse = await fetch(
         `${WEATHER_API_URL}weather/?lat=${lat}&lon=${long}&units=metric&APPID=${WEATHER_API_KEY}`
       );
       const weatherData = await weatherResponse.json();
       setWeather(weatherData);
       setNewWeather(weatherData);
-    }
-  };
-  //obtener geolocalizacion actual del browser
-  useEffect(() => {
-    const fetchDataLocation = async () => {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setLat(position.coords.latitude);
-        setLong(position.coords.longitude);
-        setLocationLoaded(true); // Marcamos que se han cargado los datos de geolocalización
-      });
     };
 
-    if (lat !== null && long !== null && locationLoaded) {
+    if (locationLoaded) {
       // Se han cargado las coordenadas de geolocalización
       fetchWeatherData();
-      fetchForecastData(); // Llamar a fetchForecastData() después de establecer el estado weather
+      fetchForecastData();
     } else {
       // Aún se están obteniendo las coordenadas de geolocalización
       fetchDataLocation();
     }
-  }, [lat, long, locationLoaded, newLat, newLong, newWeather]);
+  }, [lat, long, locationLoaded]);
 
   const fetchForecastData = async () => {
-    if (newLat.length === 0 || newLong.length === 0) {
+    console.log("weather.id:", weather.id);
+    console.log("newWeather.id", newLong);
+
+    if (weather.id === newWeather.id) {
       const forecastResponse = await fetch(
         `${WEATHER_API_URL}forecast?lat=${lat}&lon=${long}&units=metric&appid=${WEATHER_API_KEY}`
       );
       const forecastData = await forecastResponse.json();
       setForecast(forecastData.list);
-    } else if (newLat !== lat && newLong !== long) {
+    } else {
       const forecastResponse = await fetch(
         `${WEATHER_API_URL}forecast?lat=${newLat}&lon=${newLong}&units=metric&appid=${WEATHER_API_KEY}`
       );
@@ -71,20 +82,23 @@ export const WeatherContextProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchForecastData();
+  }, [newLat, newLong, lat, long, weather]);
+
   // crear funcion que busque la ciudad ingresada en el buscador y obtenga las coordenadas las almacene
-  const fetchCitySearch = async (cityName) => {
+  const fetchCitySearch = async (coordinates) => {
     try {
       const cityResponse = await fetch(
-        `${WEATHER_API_URL}weather?q=${cityName}&units=metric&appid=${WEATHER_API_KEY}`
+        `${WEATHER_API_URL}weather/?lat=${coordinates[0]}&lon=${coordinates[1]}&units=metric&APPID=${WEATHER_API_KEY}`
       );
+      console.log("forecast.list", cityResponse);
       const cityData = await cityResponse.json();
-      console.log("forecast.list", cityData);
-      const newLatCity = cityData.coord.lat;
-      const newLongCity = cityData.coord.lat;
-      setNewLat(newLatCity);
-      setNewLong(newLongCity);
+      setNewLat(cityData.coord.lat);
+      setNewLong(cityData.coord.lon);
       setWeather(cityData);
       setInputCityName(cityData.name);
+      fetchForecastData();
     } catch (error) {
       console.error("Error fetching city data:", error);
       Swal.fire({
@@ -94,13 +108,11 @@ export const WeatherContextProvider = ({ children }) => {
       });
     }
   };
+  console.log("newLat:", newLat);
+  console.log("newLong:", newLong);
 
   const realoadCityInformation = () => {
-    if (inputCityName === "") {
-      fetchWeatherData();
-    } else {
-      fetchCitySearch(inputCityName);
-    }
+    fetchForecastData();
   };
   //Paso las condiciones meteorologicas segun devuelva la API de ingles al espanol
   //luego llamo esta funcion en el title de la card y renderizo el resultado
@@ -200,6 +212,7 @@ export const WeatherContextProvider = ({ children }) => {
     newWeather,
     fetchCitySearch,
     realoadCityInformation,
+    citySearch,
   };
 
   console.log("weather", weather);

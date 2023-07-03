@@ -19,7 +19,7 @@ export default function CardTitle() {
         <div className="button-group">
           <div>
             <button className="btn" type="button" onClick={() => realoadCityInformation()}>
-              <HiOutlineRefresh />
+              <HiOutlineRefresh style={{fontSize:"20px"}}/>
             </button>
           </div>
           <p>
@@ -31,7 +31,7 @@ export default function CardTitle() {
               aria-expanded="false"
               aria-controls="multiCollapseExample1"
             >
-              <FiPlusSquare />
+              <FiPlusSquare style={{fontSize:"20px"}} />
             </a>
           </p>
           <div class="row">
