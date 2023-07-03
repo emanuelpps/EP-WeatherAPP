@@ -8,7 +8,7 @@ import { WEATHER_API_KEY } from "../../../../api/WeatherApi/WeatherApi";
 export default function CitySelection() {
   const [cityName, setCityName] = useState(null);
   const [coordinates, setCoordinates] = useState([]);
-  const { fetchCitySearch } = useContext(WeatherContext);
+  const { fetchCitySearch, realoadCityInformation } = useContext(WeatherContext);
 
  
 
@@ -52,6 +52,7 @@ export default function CitySelection() {
   const handleClick = (e) => {
     e.preventDefault();
     fetchCitySearch(coordinates);
+    realoadCityInformation(coordinates)
     console.log('coord',coordinates);
   };
 

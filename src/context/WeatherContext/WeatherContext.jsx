@@ -111,8 +111,7 @@ export const WeatherContextProvider = ({ children }) => {
   console.log("newLat:", newLat);
   console.log("newLong:", newLong);
 
-  const realoadCityInformation = () => {
-    fetchCitySearch();
+  const realoadCityInformation = (coordinates) => {
     fetchForecastData();
   };
   //Paso las condiciones meteorologicas segun devuelva la API de ingles al espanol
