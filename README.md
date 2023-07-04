@@ -3,8 +3,9 @@
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
-<img src="https://i.ibb.co/Gdh2KNQ/EP-Weather-1.gif"/>
-
+<div align="center" margin-top: "300px">
+<img src="https://i.ibb.co/Gdh2KNQ/EP-Weather-1.gif" align="center" height="300" width="600" />
+</div>  
 
 https://emanuelpps.github.io/EP-WeatherAPP/
 
