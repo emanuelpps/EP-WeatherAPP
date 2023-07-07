@@ -96,7 +96,10 @@ export default function DashboardContainer() {
           <DashboardCity />
         </div>
       ) : (
+        <div>
         <Loader className="text-center mx-auto" />
+        <p className="text-center"><b>RECORDÁ ACTIVAR TU GEOLOCALIZACIÓN</b></p>
+        </div>
       )}
     </div>
   );
