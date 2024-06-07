@@ -1,4 +1,4 @@
-![EP Weather App](https://media.licdn.com/dms/image/D4E2DAQGhZWWXjFKpTg/profile-treasury-image-shrink_1280_1280/0/1689100474943?e=1701698400&v=beta&t=Zu7YqDZCtQuJ7aEh6KWxFFQUg70sNUWRkUEY0UfaHh0)
+![EP Weather App](https://res.cloudinary.com/dkgoszhfr/image/upload/v1709597397/hosting/ep-weather/ii4w2urz0zhleyeygebt.png)
 
 # EP Weather App
 
